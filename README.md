@@ -10,7 +10,7 @@ To start off this project I needed to understand the data. To do so I used a ent
 
 The code for this project can be found [here](https://github.com/SiyamDodhiaAnalyst/Marketing_Analytics_Case_Study_SQL/blob/main/Marketing%20Analytics%20Case%20Study%20(CODE).txt) with comments throughout to explain my process. 
 
-## Quiz Questions
+## [Quiz Questions]()
 At the end of this project I was tasked with completing a quiz based off data I had previosuly analysed and tables I had created throughout the project - these questions can also be of interest to the Marketing team:   
 1. Which film title was the most recommended for all customers?
 2. How many customers were included in the email campaign?
