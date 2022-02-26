@@ -1,0 +1,79 @@
+/* 
+########################
+###EXERCISE QUESTIONS###
+########################
+*/ 
+
+-- 1. Which film title was the most recommended for all customers?
+SELECT 
+  title, 
+  COUNT(*) AS frequency
+FROM long_form_recommendations
+GROUP BY title
+ORDER BY frequency DESC; 
+
+-- 2. How many customers were included in the email campaign?
+SELECT 
+  COUNT(DISTINCT customer_id)
+FROM long_form_recommendations;
+
+-- 3. Out of all the possible films - what percentage coverage do we have in our recommendations?
+WITH recommended_film_covarage AS (
+  SELECT
+    COUNT(DISTINCT title) AS unique_reco_films
+  FROM long_form_recommendations 
+),  
+  all_films AS (
+  SELECT
+    COUNT(DISTINCT title) AS unique_films
+  FROM dvd_rentals.film
+)
+SELECT 
+  unique_reco_films, 
+  unique_films,
+  ROUND(
+    100 * unique_reco_films::NUMERIC/unique_films::NUMERIC,
+    2
+    ) AS coverage_percentage
+  FROM recommended_film_covarage, all_films;
+
+-- 4. What is the most popular top category?
+  -- 5. What is the 4th most popular top category?
+SELECT
+  category_name, 
+  COUNT(*) AS popularity_count
+FROM first_category_insights
+GROUP BY category_name
+ORDER BY popularity_count DESC;
+
+-- 6. What is the average percentile ranking for each customer in their top category rounded to the nearest 2 decimal places?
+SELECT
+  ROUND(AVG(percentile::NUMERIC), 2) AS avg_percentile
+FROM first_category_insights;
+
+-- 7. What is the cumulative distribution of the top 5 percentile values for the top category from the first_category_insights table rounded to the nearest round percentage?
+SELECT
+  ROUND(percentile) AS percentile,
+  COUNT(*),
+  ROUND(100 * CUME_DIST() OVER (ORDER BY ROUND(percentile))) AS cumulative_distribution
+FROM first_category_insights
+GROUP BY percentile
+ORDER BY percentile;
+
+-- 8. What is the median of the second category percentage of entire viewing history?
+SELECT
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY total_percentage) AS median_value
+FROM second_category_insights;
+
+-- 9. What is the 80th percentile of films watched featuring each customer’s favourite actor?
+SELECT
+  PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY rental_count) AS percentile_value
+FROM top_actor_counts;
+
+/*
+10. What was the average number of films watched by each customer?
+11. What is the top combination of top 2 categories and how many customers if the order is relevant (e.g. Horror and Drama is a different combination to Drama and Horror)
+12. Which actor was the most popular for all customers?
+13. How many films on average had customers already seen that feature their favourite actor rounded to closest integer?
+14. What is the most common top categories combination if order was irrelevant and how many customers have this combination? (e.g. Horror and Drama is a the same as Drama and Horror)
+*/ 
