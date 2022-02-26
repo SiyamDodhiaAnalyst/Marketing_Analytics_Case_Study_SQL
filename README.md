@@ -21,8 +21,3 @@ At the end of this project I was tasked with completing a quiz based off data I 
 7. What is the cumulative distribution of the top 5 percentile values for the top category from the first_category_insights table rounded to the nearest round percentage?
 8. What is the median of the second category percentage of entire viewing history?
 9. What is the 80th percentile of films watched featuring each customer’s favourite actor?
-10. What was the average number of films watched by each customer?
-11. What is the top combination of top 2 categories and how many customers if the order is relevant (e.g. Horror and Drama is a different combination to Drama and Horror)
-12. Which actor was the most popular for all customers?
-13. How many films on average had customers already seen that feature their favourite actor rounded to closest integer?
-14. What is the most common top categories combination if order was irrelevant and how many customers have this combination? (e.g. Horror and Drama is a the same as Drama and Horror)
